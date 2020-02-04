@@ -9,9 +9,14 @@ using namespace std;
 
 #pragma region Variables
 
+int gameMode;
+
 std::vector<int> cards;
 std::vector<int> playerCards;
 std::vector<int> dealerCards;
+
+enum Aces { ace0 = 1, ace1 = 1, ace2 = 1, ace3 = 1 };
+
 std::string playerName;
 int randomized = 0;
 
@@ -33,14 +38,45 @@ void FillCardVector()
 {
 	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 2; j < 12; j++)
+		for (int j = 2; j < 11; j++)
 		{
 			cards.push_back(j);
 		}
 	}
+
+	cards.push_back(ace0);
+	cards.push_back(ace1);
+	cards.push_back(ace2);
+	cards.push_back(ace3);
+
 }
 
-void Instructions()
+void PickGame()
+{
+	while (playerInput.empty())
+	{
+		system("CLS");
+		std::cout << "Please pick a game" << endl;
+		std::cout << "1: BlackJack \n2: Poker \n3: War" << endl;
+		std::cin >> playerInput;
+		choice = stoi(playerInput);
+		if (choice == 1)
+		{
+			gameMode = choice;
+		}
+		else if (choice == 2)
+		{
+			gameMode = choice;
+		}
+		else if (gameMode == 3)
+		{
+			gameMode = choice;
+		}
+
+	}
+}
+
+void InstructionsBlackJack()
 {
 	system("CLS");
 	std::cout << "Hello " << playerName << endl;
@@ -74,6 +110,12 @@ void GetCard(unsigned short int player)
 	{
 	case 0:
 		std::move(cards.begin() + randomized - 1, cards.begin() + randomized, std::back_inserter(playerCards));
+
+		/*if (std::find(playerCards.begin(), playerCards.end(), ace0) != playerCards.end())
+		{
+
+		}*/
+
 		PlayerCardValue = 0;
 		for (auto& i : playerCards)
 			PlayerCardValue += i;
@@ -225,95 +267,115 @@ void DealerTurn()
 	}
 }
 
+
 int main()
 {
+	FillCardVector();
+	PickGame();
+
 	while (playerName.empty())
 	{
 		std::cout << "Please enter your name" << endl;
 		std::cin >> playerName;
 	}
 
-	FillCardVector();
-	//Instructions();
-
-	while (true)
+	switch (gameMode)
 	{
-		dealerDone = false;
-		system("CLS");
-		std::cout << "New Round!";
-
-		PlayerCardValue = 0;
-		DealerCardvalue = 0;
-
-		playerCards.clear();
-		dealerCards.clear();
-
-		Sleep(2000);
+	case 1:
+		InstructionsBlackJack();
 
 		while (true)
 		{
+			dealerDone = false;
 			system("CLS");
-			std::cout << "Credits in account: " << credits << endl;
-			std::cout << "How much credits do wish to bet?" << endl;
-			std::cin >> playerInput;
-			bettedCredits = std::stoi(playerInput);
-			if (bettedCredits <= credits && bettedCredits > 0)
-			{
-				system("CLS");
-				std::cout << bettedCredits << " in the game" << endl;
-				Sleep(2000);
-				break;
-			}
-			else
-			{
-				std::cout << "Not enough credits!" << endl;
-				Sleep(2000);
-			}
-		}
+			std::cout << "New Round!";
 
-		for (int i = 0; i < 2; i++)
-		{
-			GetCard(0);
-		}
+			PlayerCardValue = 0;
+			DealerCardvalue = 0;
 
-		if (PlayerCardValue == 21)
-		{
-			endingScreens(5);
-		}
-		else
-		{
+			playerCards.clear();
+			dealerCards.clear();
+
+			Sleep(2000);
+
 			while (true)
 			{
 				system("CLS");
-				std::cout << "Your hand: " << PlayerCardValue << endl;
-				std::cout << "1: Draw an extra card \n2: Hold" << endl;
-
+				std::cout << "Credits in account: " << credits << endl;
+				std::cout << "How much credits do wish to bet?" << endl;
 				std::cin >> playerInput;
-				choice = stoi(playerInput);
-
-				if (choice == 1)
+				bettedCredits = std::stoi(playerInput);
+				if (bettedCredits <= credits && bettedCredits > 0)
 				{
-					GetCard(0);
-					if (PlayerCardValue > 21)
+					system("CLS");
+					std::cout << bettedCredits << " in the game" << endl;
+					Sleep(2000);
+					break;
+				}
+				else
+				{
+					std::cout << "Not enough credits!" << endl;
+					Sleep(2000);
+				}
+			}
+
+			for (int i = 0; i < 2; i++)
+			{
+				GetCard(0);
+			}
+
+			if (PlayerCardValue == 21)
+			{
+				endingScreens(5);
+			}
+			else
+			{
+				while (true)
+				{
+					system("CLS");
+					std::cout << "Your hand: " << PlayerCardValue << endl;
+					std::cout << "1: Draw an extra card \n2: Hold" << endl;
+
+					std::cin >> playerInput;
+					choice = stoi(playerInput);
+
+					if (choice == 1)
 					{
-						endingScreens(1);
+						GetCard(0);
+						if (PlayerCardValue > 21)
+						{
+							endingScreens(1);
+							break;
+						}
+					}
+					else if (choice == 2)
+					{
+						std::cout << "Stand!" << endl;
+						Sleep(200);
+						std::cout << "Dealer turn" << endl;
+						Sleep(2000);
+						DealerTurn();
 						break;
 					}
 				}
-				else if (choice == 2)
-				{
-					std::cout << "Stand!" << endl;
-					Sleep(200);
-					std::cout << "Dealer turn" << endl;
-					Sleep(2000);
-					DealerTurn();
-					break;
-				}
 			}
 		}
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
 	}
+
+	
+
+
 }
 
 #pragma region Later Use
-//system("CLS");
+/*
+
+
+
+*/
 #pragma endregion
