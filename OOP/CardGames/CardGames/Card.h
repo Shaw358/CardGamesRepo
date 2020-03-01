@@ -3,7 +3,6 @@
 
 class Card
 {
-
 public:
 	Card(int aValue);
 	~Card();
@@ -20,6 +19,4 @@ private:
 	CardType typeOfCard;
 	
 	int value;
-	
-
 };
