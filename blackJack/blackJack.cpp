@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <ctime>
 #include <cstdlib>
+#include <string.h>;
 using namespace std;
 
 #pragma region Variables
@@ -15,13 +16,13 @@ std::vector<int> cards;
 std::vector<int> playerCards;
 std::vector<int> dealerCards;
 
-enum Aces { ace0 = 1, ace1 = 1, ace2 = 1, ace3 = 1 };
-
 std::string playerName;
 int randomized = 0;
 
-int credits = 2000;
-int bettedCredits;
+std::vector<std::string> alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+
+long long int credits = 2000;
+long long int bettedCredits;
 
 std::string playerInput;
 int choice;
@@ -72,7 +73,6 @@ void PickGame()
 		{
 			gameMode = choice;
 		}
-
 	}
 }
 
@@ -81,7 +81,7 @@ void InstructionsBlackJack()
 	system("CLS");
 	std::cout << "Hello " << playerName << endl;
 	cin.ignore();
-	std::cout << "I am here to quickly explaint to you how blackjack works" << endl;
+	std::cout << "I am here to quickly explain to you how blackjack works" << endl;
 	std::cout << "Press enter to proceed" << endl;
 	cin.ignore();
 	std::cout << "You are playing to get a total card value of 21" << endl;
@@ -139,7 +139,7 @@ void endingScreens(int result)
 		std::cout << "Dealer hand: " << DealerCardvalue << endl;
 		bettedCredits *= 2;
 		std::cout << "You win!\nCredits earned: " << bettedCredits << endl;
-		credits += bettedCredits;
+		credits == bettedCredits;
 		Sleep(3000);
 		break;
 	case 1:
@@ -152,7 +152,6 @@ void endingScreens(int result)
 	case 2:
 		std::cout << "Push!" << endl;
 		std::cout << "Credits earned: 0 " << endl;
-		credits += bettedCredits;
 		Sleep(3000);
 		break;
 	case 5:
@@ -267,9 +266,28 @@ void DealerTurn()
 	}
 }
 
-
 int main()
 {
+	/*while (true)
+	{
+		std::cin >> playerInput;
+		for (int i = 0; i < alphabet.size(); i++)
+		{
+			std::size_t found = playerInput.find(alphabet[i]);
+
+			if (found != std::string::npos)
+			{
+				std::cout << " Characters and (with numbers) found" << endl;
+				break;
+			}
+			else
+			{
+				std::cout << "only numbers have been found" << endl;
+				break;
+			}
+		}
+	}*/
+
 	FillCardVector();
 	PickGame();
 
@@ -304,7 +322,17 @@ int main()
 				std::cout << "Credits in account: " << credits << endl;
 				std::cout << "How much credits do wish to bet?" << endl;
 				std::cin >> playerInput;
-				bettedCredits = std::stoi(playerInput);
+
+				
+
+				if (playerInput == "all")
+				{
+					bettedCredits = credits;
+				}
+				else
+				{
+					bettedCredits = std::stoi(playerInput);
+				}
 				if (bettedCredits <= credits && bettedCredits > 0)
 				{
 					system("CLS");
