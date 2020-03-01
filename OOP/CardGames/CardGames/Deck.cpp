@@ -19,6 +19,7 @@ void Deck::DrawCard(Player* aPlayer, int anAmount = 1)
 	if (remainingCards.size() > 0)
 	{
 		std::move(remainingCards.begin(),remainingCards.begin() + anAmount, std::back_inserter(*aPlayer->getHand()->getCards()));
+
 	}
 }
 
@@ -34,6 +35,13 @@ void Deck::Fill()
 			remainingCards.back()->setCardType(1);
 		}
 	}
+}
+
+void Deck::Erase()
+{
+
+
+
 }
 
 void Deck::Shuffle()

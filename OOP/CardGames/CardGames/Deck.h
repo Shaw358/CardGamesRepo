@@ -14,6 +14,8 @@ public:
 
 	void Fill();
 
+	void Erase();
+
 	void Shuffle();
 
 	void ShowRemainingCards();

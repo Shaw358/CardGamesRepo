@@ -77,11 +77,6 @@ int IO::AskInt(std::string aString, int aNumber)
 					}
 				}
 			case 1:
-
-
-
-				break;
-			case 2:
 				//for selecting the amount of players
 				choiceInt = std::stoi(input);
 				return choiceInt;

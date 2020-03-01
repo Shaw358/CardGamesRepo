@@ -57,7 +57,7 @@ int main()
 	deck.Shuffle();
 	deck.ShowRemainingCards();
 
-	choiceInt = io.AskInt("How many players will be participating?", 2);
+	choiceInt = io.AskInt("How many players will be participating?", 1);
 
 	for (int i = 0; i < choiceInt + 1; i++)
 	{
