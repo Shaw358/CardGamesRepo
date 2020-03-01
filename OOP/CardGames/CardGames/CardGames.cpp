@@ -74,7 +74,10 @@ int main()
 
 			std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 
-			choiceInt = io.AskInt("Dealer: draw or stand?", 1);
+			
 		}
+
+		choiceInt = io.AskInt("Dealer: draw or stand?" + currentPlayer, 1);
+
 	}
 }
