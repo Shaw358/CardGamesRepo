@@ -1,5 +1,6 @@
 #include "IO.h"
 #include "iostream"
+#include "InputEnum.h"
 
 IO::IO()
 {
@@ -47,6 +48,10 @@ int IO::AskInt(std::string aString, int aNumber)
 			else if (input.find("exit_game") != std::string::npos)
 			{
 				std::cout << "Exiting game...";
+			}
+			else
+			{
+				std::cout << "unkown command!" << std::endl;
 			}
 		}
 #pragma endregion

@@ -1,5 +1,6 @@
 #pragma once
 #include "string"
+#include "InputEnum.h"
 
 class IO
 {
@@ -11,4 +12,3 @@ public:
 	bool AskBool(std::string aString);
 	int AskInt(std::string aString, int aNumber);
 };
-

@@ -1,6 +1,6 @@
 #pragma once
 enum class InputEnum
 {
-	draw = 1,
-	stand = 2
+	draw = 0,
+	stand = 1
 };

@@ -71,8 +71,10 @@ int main()
 	}
 
 	currentPlayer = 0;
+
 #pragma endregion setup phase end
-	for (int i = 0; i < players.size(); i++)
+
+	for (int i = 0; i < players.size(); i++, currentPlayer++)
 	{
 		std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 
@@ -88,6 +90,7 @@ int main()
 				std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 				if (players.at(currentPlayer)->getHand()->getBalance() > 21)
 				{
+					std::cout << "Dealer: player " << currentPlayer << " busted!";
 					//player busted!
 				}
 				break;
