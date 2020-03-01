@@ -30,7 +30,7 @@ bool IO::AskBool(std::string aString)
 int IO::AskInt(std::string aString, int aNumber)
 {
 	std::string input;
-	int choiceInt;
+	int choiceInt = 0;
 	std::cout << aString << std::endl;
 
 	while (true)
@@ -73,9 +73,9 @@ int IO::AskInt(std::string aString, int aNumber)
 					else
 					{
 						std::cout << "Not a possible reply" << std::endl;
+						break;
 					}
 				}
-				break;
 			case 1:
 
 
@@ -87,7 +87,7 @@ int IO::AskInt(std::string aString, int aNumber)
 				return choiceInt;
 				break;
 			}
-			
+
 		}
 	}
 }

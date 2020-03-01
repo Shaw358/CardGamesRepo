@@ -55,7 +55,7 @@ int main()
 
 	deck.Fill();
 	deck.Shuffle();
-	//deck.ShowRemainingCards();
+	deck.ShowRemainingCards();
 
 	choiceInt = io.AskInt("How many players will be participating?", 2);
 
@@ -71,6 +71,7 @@ int main()
 	}
 
 	currentPlayer = 0;
+	choiceInt = 0;
 
 #pragma endregion setup phase end
 
@@ -78,23 +79,22 @@ int main()
 	{
 		std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 
-		choiceInt = io.AskInt("Dealer: draw or stand?", 0);
-
 		while (choiceInt != 1)
 		{
-			choiceInt = io.AskInt("Dealer: draw or stand?", 0);
+			choiceInt = io.AskInt("Dealer: hit or stand?", 0);
 			switch (choiceInt)
 			{
 			case 0:
 				deck.DrawCard(players.at(currentPlayer), 1);
-				std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 				if (players.at(currentPlayer)->getHand()->getBalance() > 21)
 				{
 					std::cout << "Dealer: player " << currentPlayer << " busted!";
 					//player busted!
 				}
+				std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 				break;
 			case 1:
+				std::cout << "stand";
 				break;
 			}
 		}
