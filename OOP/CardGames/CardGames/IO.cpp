@@ -29,6 +29,7 @@ bool IO::AskBool(std::string aString)
 int IO::AskInt(std::string aString, int aNumber)
 {
 	std::string input;
+	int choiceInt;
 	std::cout << aString << std::endl;
 
 	while (true)
@@ -41,10 +42,11 @@ int IO::AskInt(std::string aString, int aNumber)
 			if (input.find("add_credits") != std::string::npos)
 			{
 				//addTHemCREDITS
+				std::cout << choiceInt << " credits added!";
 			}
 			else if (input.find("exit_game") != std::string::npos)
 			{
-
+				std::cout << "Exiting game...";
 			}
 		}
 #pragma endregion
@@ -75,6 +77,9 @@ int IO::AskInt(std::string aString, int aNumber)
 
 				break;
 			case 2:
+				//for selecting the amount of players
+				choiceInt = std::stoi(input);
+				return choiceInt;
 				break;
 			}
 			

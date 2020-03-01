@@ -19,7 +19,6 @@ int main()
 	Deck deck;
 	IO io;
 	Player* player;
-	int choiceInt;
 	std::string choiceString;
 	int choiceInt;
 	bool choiceBool;
@@ -38,7 +37,7 @@ int main()
 	Shuffle > Randomizes the remainingCards vector from the Deck.
 
 	ShowRemainingCards > Prints all the cards left in the remainingCards vector from the Deck.
-	
+
 	DrawCard > Gets the first Card class in the vector remainingCards in the Deck and puts in the [X player] hand.
 
 	getHand > Gets the hand class from [X player].
@@ -56,7 +55,7 @@ int main()
 
 	deck.Fill();
 	deck.Shuffle();
-	deck.ShowRemainingCards();
+	//deck.ShowRemainingCards();
 
 	choiceInt = io.AskInt("How many players will be participating?", 2);
 
@@ -64,20 +63,33 @@ int main()
 	{
 		players.push_back(new Player());
 	}
-	
-#pragma endregion setup phase end
-	while (true)
+
+	//start cards
+	for (int i = 0; i < players.size(); i++, currentPlayer++)
 	{
-		for (int i = 0; i < players.size(); i++) 
+		deck.DrawCard(players.at(currentPlayer), 2);
+	}
+
+	currentPlayer = 0;
+#pragma endregion setup phase end
+	for (int i = 0; i < players.size(); i++)
+	{
+		std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
+
+		choiceInt = io.AskInt("Dealer: draw or stand?", 0);
+
+		switch (choiceInt)
 		{
-			deck.DrawCard(players.at(currentPlayer), 2);
-
+		case 0:
+			deck.DrawCard(players.at(currentPlayer), 1);
 			std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
+			if (players.at(currentPlayer)->getHand()->getBalance() > 21)
+			{
 
-			
+			}
+			break;
+		case 1:
+			break;
 		}
-
-		choiceInt = io.AskInt("Dealer: draw or stand?" + currentPlayer, 1);
-
 	}
 }
