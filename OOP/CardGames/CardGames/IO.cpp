@@ -42,7 +42,7 @@ int IO::AskInt(std::string aString, int aNumber)
 			if (input.find("add_credits") != std::string::npos)
 			{
 				//addTHemCREDITS
-				std::cout << choiceInt << " credits added!";
+				std::cout << choiceInt << " credits added!" << std::endl;
 			}
 			else if (input.find("exit_game") != std::string::npos)
 			{

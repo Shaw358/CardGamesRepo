@@ -78,18 +78,22 @@ int main()
 
 		choiceInt = io.AskInt("Dealer: draw or stand?", 0);
 
-		switch (choiceInt)
+		while (choiceInt != 1)
 		{
-		case 0:
-			deck.DrawCard(players.at(currentPlayer), 1);
-			std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
-			if (players.at(currentPlayer)->getHand()->getBalance() > 21)
+			choiceInt = io.AskInt("Dealer: draw or stand?", 0);
+			switch (choiceInt)
 			{
-
+			case 0:
+				deck.DrawCard(players.at(currentPlayer), 1);
+				std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
+				if (players.at(currentPlayer)->getHand()->getBalance() > 21)
+				{
+					//player busted!
+				}
+				break;
+			case 1:
+				break;
 			}
-			break;
-		case 1:
-			break;
 		}
 	}
 }
