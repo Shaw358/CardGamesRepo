@@ -24,6 +24,7 @@ int main()
 	std::string choiceString;
 	int choiceInt;
 	bool choiceBool;
+	int game_speed;
 
 	std::vector<Player*> players;
 	std::vector<int> playerBets;
@@ -59,7 +60,6 @@ int main()
 	deck.Fill();
 	deck.Shuffle();
 	deck.ShowRemainingCards();
-	dealer->setDeck(deck);
 
 	choiceInt = io.AskInt("How many players will be participating?", 1);
 
@@ -115,7 +115,24 @@ int main()
 		}
 	}
 
-	dealer->DealerTurn(players.size(), players);
+	int dealerResponse;
+	for (int i = 0; i < players.size(); i++)
+	{
+		dealerResponse = dealer->DealerTurn(1, players.at(i));
+		switch (dealerResponse)
+		{
+		case 0:
+			std::cout << "Dealer: stand!" << std::endl;
+
+			break;
+		case 1:
+			std::cout << "Dealer: hit!" << std::endl;
+			deck.DrawCard(NULL, 1, 0, dealer);
+			break;
+		}
+
+	}
+	
 
 	int dealerBalance = dealer->getBalance();
 

@@ -24,7 +24,7 @@ void Deck::DrawCard(Player* aPlayer = NULL, int anAmount = 1, int aPlayerType = 
 		case 0:
 			//dealer draws card
 			
-
+			std::move(remainingCards.begin(), remainingCards.begin() + anAmount, std::back_inserter(*dealer->getCard()));
 
 			break;
 		case 1:

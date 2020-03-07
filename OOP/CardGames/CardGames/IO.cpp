@@ -48,6 +48,10 @@ int IO::AskInt(std::string aString, int aNumber)
 			{
 				return 100;
 			}
+			else if (input.find("set_game_speed") != std::string::npos)
+			{
+				std::cout << "game speed set to: ";
+			}
 			else
 			{
 				std::cout << "unkown command!" << std::endl;
