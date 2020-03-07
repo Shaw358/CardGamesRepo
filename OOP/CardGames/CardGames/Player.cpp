@@ -21,5 +21,5 @@ int Player::getBalance()
 
 void Player::setBalance(int anAmount)
 {
-
+	balance += anAmount;
 }

@@ -3,6 +3,7 @@
 #include "Card.h"
 #include "Hand.h"
 #include "Player.h"
+#include "Dealer.h"
 
 class Deck
 {
@@ -10,7 +11,7 @@ public:
 	Deck();
 	~Deck();
 
-	void DrawCard(Player* aPlayer, int anAmount);
+	void DrawCard(Player* aPlayer, int anAmount, int aPlayerType, Dealer* dealer);
 
 	void Fill();
 

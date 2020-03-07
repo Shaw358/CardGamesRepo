@@ -1,6 +1,7 @@
 #include "Hand.h"
 
 Hand::Hand()
+	:balance(0)
 {
 }
 
@@ -10,30 +11,20 @@ Hand::~Hand()
 
 std::vector<Card*>* Hand::getCards()
 {
-	return &cards;
-}
-
-void Hand::setCard(Card* aCard)
-{
-
+	return cards;
 }
 
 int Hand::getBalance()
 {
-	int totalBalance = 0;
-	for (int i = 0; i < cards.size(); i++)
-	{
-		totalBalance += cards.at(i)->GetValue();
-	}
-	return totalBalance;
+	return balance;
 }
 
-void Hand::setBalance(int aValue)
+void Hand::setBalance()
 {
 	int totalBalance = 0;
-	for (int i = 0; i < cards.size(); i++)
+	for (int i = 0; i < cards->size(); i++)
 	{
-		totalBalance += cards.at(i)->GetValue();
+		totalBalance += cards->at(i)->GetValue();
 	}
-	totalBalance = balance;
+	balance = totalBalance;
 }

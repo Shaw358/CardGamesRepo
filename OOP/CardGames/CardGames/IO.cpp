@@ -1,6 +1,5 @@
 #include "IO.h"
 #include "iostream"
-#include "InputEnum.h"
 
 IO::IO()
 {
@@ -47,7 +46,7 @@ int IO::AskInt(std::string aString, int aNumber)
 			}
 			else if (input.find("exit_game") != std::string::npos)
 			{
-				std::cout << "Exiting game...";
+				return 100;
 			}
 			else
 			{
@@ -69,6 +68,7 @@ int IO::AskInt(std::string aString, int aNumber)
 					else if (input == "stand")
 					{
 						return 1;
+						break;
 					}
 					else
 					{
@@ -77,7 +77,7 @@ int IO::AskInt(std::string aString, int aNumber)
 					}
 				}
 			case 1:
-				//for selecting the amount of players
+				//for selecting the amount of players and bets
 				choiceInt = std::stoi(input);
 				return choiceInt;
 				break;

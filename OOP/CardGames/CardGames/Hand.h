@@ -8,12 +8,10 @@ public:
 	~Hand();
 
 	std::vector<Card*>* getCards();
-	void setCard(Card* aCard);
 	int getBalance();
-	void setBalance(int aValue);
+	void setBalance();
 
 private:
-	std::vector<Card*> cards;
+	std::vector<Card*>* cards = new std::vector<Card*>();
 	int balance;
 };
-

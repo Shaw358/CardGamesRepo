@@ -10,6 +10,7 @@
 #include "Deck.h"
 #include "Player.h"
 #include "IO.h"
+#include "Dealer.h"
 
 int main()
 {
@@ -19,11 +20,13 @@ int main()
 	Deck deck;
 	IO io;
 	Player* player;
+	Dealer* dealer;
 	std::string choiceString;
 	int choiceInt;
 	bool choiceBool;
 
 	std::vector<Player*> players;
+	std::vector<int> playerBets;
 
 #pragma endregion
 
@@ -56,10 +59,11 @@ int main()
 	deck.Fill();
 	deck.Shuffle();
 	deck.ShowRemainingCards();
+	dealer->setDeck(deck);
 
 	choiceInt = io.AskInt("How many players will be participating?", 1);
 
-	for (int i = 0; i < choiceInt + 1; i++)
+	for (int i = 0; i < choiceInt; i++)
 	{
 		players.push_back(new Player());
 	}
@@ -67,7 +71,7 @@ int main()
 	//start cards
 	for (int i = 0; i < players.size(); i++, currentPlayer++)
 	{
-		deck.DrawCard(players.at(currentPlayer), 2);
+		deck.DrawCard(players.at(currentPlayer), 2, 1, NULL);
 	}
 
 	currentPlayer = 0;
@@ -75,17 +79,23 @@ int main()
 
 #pragma endregion setup phase end
 
+	currentPlayer = 0;
+	for (int i = 0; i < players.size(); i++, currentPlayer++)
+	{
+		playerBets.push_back(io.AskInt("Dealer: player X player, place your bet.", 1));
+	}
+
 	for (int i = 0; i < players.size(); i++, currentPlayer++)
 	{
 		std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 
 		while (choiceInt != 1)
 		{
-			choiceInt = io.AskInt("Dealer: hit or stand?", 0);
-			switch (choiceInt)
+			choiceInt = io.AskInt("Dealer: hit or stand?", 0);	
+			switch (choiceInt) 
 			{
 			case 0:
-				deck.DrawCard(players.at(currentPlayer), 1);
+				deck.DrawCard(players.at(currentPlayer), 1, 1, NULL);
 				if (players.at(currentPlayer)->getHand()->getBalance() > 21)
 				{
 					std::cout << "Dealer: player " << currentPlayer << " busted!";
@@ -93,10 +103,42 @@ int main()
 				}
 				std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 				break;
+
 			case 1:
-				std::cout << "stand";
+				std::cout << "Dealer: Player " << currentPlayer << " card value: " << players.at(currentPlayer)->getHand()->getBalance() << std::endl;
 				break;
+
+			case 100:
+				std::cout << "Exiting game..." << std::endl;
+				return 0;
 			}
+		}
+	}
+
+	dealer->DealerTurn(players.size(), players);
+
+	int dealerBalance = dealer->getBalance();
+
+	for (int i = 0; i < players.size(); i++)
+	{
+		if (dealerBalance > players.at(i)->getHand()->getBalance())
+		{
+			std::cout << "Dealer: " << "player " << i << " lost!";
+			playerBets.at(i) = 0;
+		}
+		else if (dealerBalance < players.at(i)->getHand()->getBalance())
+		{
+			std::cout << "Dealer: " << "player " << i << " won!";
+			players.at(i)->setBalance(playerBets.at(i) * 2);
+		}
+		else if (dealerBalance == players.at(i)->getHand()->getBalance())
+		{
+			std::cout << "Dealer: " << "player " << i << " push!";
+			playerBets.at(i) = 0;
+		}
+		else
+		{
+			std::cout << "Unrecognised action...";
 		}
 	}
 }

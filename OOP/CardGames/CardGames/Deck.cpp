@@ -7,6 +7,7 @@
 #include <algorithm> 
 
 Deck::Deck()
+	:randomInt(0)
 {
 }
 
@@ -14,12 +15,28 @@ Deck::~Deck()
 {
 }
 
-void Deck::DrawCard(Player* aPlayer, int anAmount = 1)
+void Deck::DrawCard(Player* aPlayer = NULL, int anAmount = 1, int aPlayerType = 1, Dealer* dealer = NULL)
 {
-	if (remainingCards.size() > 0)
+	if (remainingCards.size() > anAmount)
 	{
-		std::move(remainingCards.begin(),remainingCards.begin() + anAmount, std::back_inserter(*aPlayer->getHand()->getCards()));
+		switch (aPlayerType)
+		{
+		case 0:
+			//dealer draws card
+			
 
+
+			break;
+		case 1:
+			//player draws card
+
+			std::move(remainingCards.begin(), remainingCards.begin() + anAmount, std::back_inserter(*aPlayer->getHand()->getCards()));
+			aPlayer->getHand()->setBalance();
+
+			remainingCards.erase(remainingCards.begin(), remainingCards.begin() + anAmount);
+
+			break;
+		}
 	}
 }
 
@@ -60,3 +77,14 @@ void Deck::ShowRemainingCards()
 }
 
 
+#pragma region garbage
+/* for (int i = 0; i < anAmount; i++)
+{
+	aPlayer->getHand()->getCards()->push_back(std::move(remainingCards.back()));
+	//remainingCards.erase(remainingCards.end, remainingCards.end);
+}
+*/
+
+
+//std::move(remainingCards.begin(),remainingCards.begin() + anAmount, std::back_inserter(*aPlayer->getHand()->getCards()));
+#pragma endregion
