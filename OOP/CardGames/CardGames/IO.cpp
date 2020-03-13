@@ -83,6 +83,7 @@ int IO::AskInt(std::string aString, int aNumber)
 			case 1:
 				//for selecting the amount of players and bets
 				choiceInt = std::stoi(input);
+				std::cout << choiceInt << std::endl;
 				return choiceInt;
 				break;
 			}

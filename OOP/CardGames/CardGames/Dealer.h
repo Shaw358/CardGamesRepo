@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include "Player.h"
-#include "Deck.h"
 
 class Dealer
 {
@@ -16,7 +15,6 @@ public:
 
 private:
 	int cardBalance;
-	Deck deck;
 
 	std::vector<Card*>* cards = new std::vector<Card*>();
 };

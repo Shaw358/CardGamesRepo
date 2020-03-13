@@ -44,12 +44,6 @@ void FillCardVector()
 			cards.push_back(j);
 		}
 	}
-
-	cards.push_back(ace0);
-	cards.push_back(ace1);
-	cards.push_back(ace2);
-	cards.push_back(ace3);
-
 }
 
 void PickGame()

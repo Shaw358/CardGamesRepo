@@ -20,7 +20,7 @@ int main()
 	Deck deck;
 	IO io;
 	Player* player;
-	Dealer* dealer;
+	Dealer* dealer{};
 	std::string choiceString;
 	int choiceInt;
 	bool choiceBool;
@@ -79,11 +79,12 @@ int main()
 
 #pragma endregion setup phase end
 
-	currentPlayer = 0;
 	for (int i = 0; i < players.size(); i++, currentPlayer++)
 	{
 		playerBets.push_back(io.AskInt("Dealer: player X player, place your bet.", 1));
 	}
+
+	currentPlayer = 0;
 
 	for (int i = 0; i < players.size(); i++, currentPlayer++)
 	{
@@ -91,8 +92,8 @@ int main()
 
 		while (choiceInt != 1)
 		{
-			choiceInt = io.AskInt("Dealer: hit or stand?", 0);	
-			switch (choiceInt) 
+			choiceInt = io.AskInt("Dealer: hit or stand?", 0);
+			switch (choiceInt)
 			{
 			case 0:
 				deck.DrawCard(players.at(currentPlayer), 1, 1, NULL);
@@ -132,9 +133,9 @@ int main()
 		}
 
 	}
-	
 
-	int dealerBalance = dealer->getBalance();
+	int dealerBalance;
+	dealerBalance = dealer->getBalance();
 
 	for (int i = 0; i < players.size(); i++)
 	{
