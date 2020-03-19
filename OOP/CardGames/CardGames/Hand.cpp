@@ -16,15 +16,15 @@ std::vector<Card*>* Hand::getCards()
 
 int Hand::getBalance()
 {
-	return balance;
+	return totalBalance;
 }
 
-void Hand::setBalance()
+void Hand::setBalance(int aValue)
 {
 	int totalBalance = 0;
-	for (int i = 0; i < cards->size(); i++)
+	for (int i = 0; i < cards.size(); i++)
 	{
-		totalBalance += cards->at(i)->GetValue();
+		totalBalance += cards.at(i)->GetValue();
 	}
-	balance = totalBalance;
+	totalBalance = balance;
 }
